@@ -32,6 +32,10 @@ namespace FirmRegister.Domain.Models
             get; set;
         }
 
+        public byte[] ImageData { get; set; }
+
+        public string ImageMimeType { get; set; }
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType

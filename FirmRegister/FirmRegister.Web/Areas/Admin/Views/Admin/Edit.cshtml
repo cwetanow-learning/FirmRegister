@@ -6,7 +6,7 @@
 
 <h2>Edit</h2>
 
-@using (Html.BeginForm("Edit", "Admin", FormMethod.Post))
+@using (Html.BeginForm("Edit", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     <div class="form-horizontal">
@@ -55,6 +55,29 @@
                 @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
             </div>
+        </div>
+
+        <div class="form-group">
+            <div style="position:relative;">
+                <label>Image</label>
+                <a class='btn' href='javascript:;'>
+                    Choose File...
+                    <input type="file" name="Image" size="40"
+                           style="position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0); opacity:0;background-color:transparent;color:transparent;" onchange='$("#upload-fileinfo").html($(this).val());'>
+                </a>
+                <span class='label label-info' id="upload-file-info">
+                </span>
+            </div>
+            @if (Model.ImageData == null)
+            {
+                <div class="form-control-static">
+                    No Image
+                </div>
+            }
+            else
+            {
+                <img class="img-thumbnail" width="150" height="150" src="@Url.Action("GetImage", "Employee",new { id=Model.Id })" />
+            }
         </div>
 
         <div class="form-group">

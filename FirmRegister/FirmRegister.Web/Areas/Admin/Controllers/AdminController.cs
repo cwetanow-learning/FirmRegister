@@ -16,7 +16,7 @@ namespace FirmRegister.Web.Areas.Admin.Controllers
     [Authorize(Roles = "Operator")]
     [RouteArea]
     public partial class AdminController : BaseController
-    {        
+    {
         public virtual ActionResult Index(int page = 1)
         {
             var users = this.UserManager.Users
@@ -34,9 +34,17 @@ namespace FirmRegister.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public virtual ActionResult Edit(ApplicationUser editedUser)
+        public virtual ActionResult Edit(ApplicationUser editedUser, HttpPostedFileBase image = null)
         {
             var user = this.UserManager.FindById(editedUser.Id);
+
+            if (image != null)
+            {
+                user.ImageMimeType = image.ContentType;
+                user.ImageData = new byte[image.ContentLength];
+                image.InputStream.Read(user.ImageData, 0,
+                image.ContentLength);
+            }
 
             user.LastName = editedUser.LastName;
             user.FirstName = editedUser.FirstName;
@@ -58,14 +66,14 @@ namespace FirmRegister.Web.Areas.Admin.Controllers
 
             return View("Index");
         }
-        
+
         public ActionResult MakeAdmin(string id)
         {
             this.UserManager.AddToRole(id, GlobalConstants.OperatorRole);
 
             return RedirectToAction("Index");
         }
-        
+
         public ActionResult Unadmin(string id)
         {
             this.UserManager.RemoveFromRole(id, GlobalConstants.OperatorRole);
