@@ -8,5 +8,5 @@
 
 @foreach (var item in Model)
 {
-    Html.Partial("_ShortenedEmployeeInfo", item);
+    Html.RenderPartial("_ShortenedEmployeeInfo", item);
 }
