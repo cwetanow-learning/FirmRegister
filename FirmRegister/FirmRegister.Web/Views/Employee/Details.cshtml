@@ -11,14 +11,14 @@
     <hr />
     <dl class="dl-horizontal">
         <dt></dt>
-        <dd>@if (Model.ImageData != null)
-        {
+        <dd>
+            @if (Model.ImageData != null)
+            {
+                <img id="profile" class="img-thumbnail" width="150" height="150"
+                     src="@Url.Action("GetImage", "Employee",new { Model.Id })" />
+            }
+        </dd>
 
-            <img class="img-thumbnail" width="150" height="150"
-                 src="@Url.Action("GetImage", "Employee",new { Model.Id })" />
-
-        }</dd>
-        
 
         <dt>
             @Html.DisplayNameFor(model => model.FirstName)
@@ -63,3 +63,12 @@
 
     </dl>
 </div>
+<script>
+    $('#profile').hover(function () {
+        $(this).addClass('transition');
+    }, function () {
+        $(this).removeClass('transition');
+    });
+
+
+</script>

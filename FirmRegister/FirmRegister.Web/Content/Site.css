@@ -22,3 +22,10 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.transition {
+    -webkit-transform: scale(2); 
+    -moz-transform: scale(2);
+    -o-transform: scale(2);
+    transform: scale(2);
+}
