@@ -11,6 +11,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using FirmRegister.Web.Models;
+using FirmRegister.Domain.Models;
+using FirmRegister.Domain.Concrete;
 
 namespace FirmRegister.Web
 {
@@ -54,7 +56,7 @@ namespace FirmRegister.Web
             manager.PasswordValidator = new PasswordValidator
             {
                 RequiredLength = 6,
-                RequireNonLetterOrDigit = true,
+                RequireNonLetterOrDigit = false,
                 RequireDigit = true,
                 RequireLowercase = true,
                 RequireUppercase = true,

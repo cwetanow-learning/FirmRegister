@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using FirmRegister.Domain.Utils.Enumerations;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace FirmRegister.Web.Models
@@ -79,6 +80,27 @@ namespace FirmRegister.Web.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [Range(0, 150, ErrorMessage = "Please provide valid age")]
+        public int Age
+        {
+            get; set;
+        }
+
+        [Required]
+        public string FirstName
+        {
+            get; set;
+        }
+
+        [Required]
+        public string LastName
+        {
+            get; set;
+        }
+
+        public GenderType Gender { get; set; }
     }
 
     public class ResetPasswordViewModel

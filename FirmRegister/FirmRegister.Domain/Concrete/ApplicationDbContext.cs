@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FirmRegister.Domain.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System.Data.Entity;
 
 namespace FirmRegister.Domain.Concrete
 {
@@ -12,6 +10,8 @@ namespace FirmRegister.Domain.Concrete
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
+
+        public DbSet<Country> Countries { get; set; }
 
         public static ApplicationDbContext Create()
         {

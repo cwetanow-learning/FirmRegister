@@ -6,6 +6,8 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using FirmRegister.Web.Models;
+using FirmRegister.Domain.Concrete;
+using FirmRegister.Domain.Models;
 
 namespace FirmRegister.Web
 {
