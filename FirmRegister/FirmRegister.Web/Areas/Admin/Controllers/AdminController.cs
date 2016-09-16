@@ -14,7 +14,7 @@ namespace FirmRegister.Web.Areas.Admin.Controllers
 {
     [Authorize(Roles = "Operator")]
     [RouteArea]
-    public class AdminController : Controller
+    public partial class AdminController : Controller
     {
         protected ApplicationUser currentUser;
         protected ApplicationUserManager userManager;
@@ -43,7 +43,7 @@ namespace FirmRegister.Web.Areas.Admin.Controllers
             }
         }
 
-        public ActionResult Index(int page = 1)
+        public virtual ActionResult Index(int page = 1)
         {
             var users = this.UserManager.Users
                 .ToList()
@@ -52,44 +52,53 @@ namespace FirmRegister.Web.Areas.Admin.Controllers
             return View(users);
         }
 
-        public ActionResult Edit(int id)
+        public virtual ActionResult Edit(string id)
         {
-            return View();
+            var user = this.UserManager.FindById(id);
+
+            return View(user);
         }
 
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public virtual ActionResult Edit(ApplicationUser editedUser)
         {
-            try
-            {
-                // TODO: Add update logic here
+            var user = this.UserManager.FindById(editedUser.Id);
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+            user.LastName = editedUser.LastName;
+            user.FirstName = editedUser.FirstName;
+            user.Age = editedUser.Age;
+            user.Email = editedUser.Email;
 
-        public ActionResult Delete(int id)
-        {
-            return View();
+            this.UserManager.Update(user);
+
+            return RedirectToAction("Index");
+
         }
 
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public virtual ActionResult Delete(string id)
         {
-            try
-            {
-                // TODO: Add delete logic here
+            var user = this.UserManager.FindById(id);
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            this.UserManager.Delete(user);
+
+            return View("Index");
+        }
+
+        [HttpPost]
+        public ActionResult MakeAdmin(string id)
+        {
+            this.UserManager.AddToRole(id, GlobalConstants.OperatorRole);
+
+            return View("Index");
+        }
+
+        [HttpPost]
+        public ActionResult Unadmin(string id)
+        {
+            this.UserManager.RemoveFromRole(id, GlobalConstants.OperatorRole);
+
+            return View("Index");
         }
     }
 }
