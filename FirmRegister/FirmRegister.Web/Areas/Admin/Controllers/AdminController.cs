@@ -1,5 +1,6 @@
 ﻿using FirmRegister.Domain.Models;
 using FirmRegister.Domain.Utils;
+using FirmRegister.Web.Controllers.Abstract;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using PagedList;
@@ -14,35 +15,8 @@ namespace FirmRegister.Web.Areas.Admin.Controllers
 {
     [Authorize(Roles = "Operator")]
     [RouteArea]
-    public partial class AdminController : Controller
-    {
-        protected ApplicationUser currentUser;
-        protected ApplicationUserManager userManager;
-
-        public ApplicationUser CurrentUser
-        {
-            get
-            {
-                return this.currentUser ?? this.UserManager.FindById(Thread.CurrentPrincipal.Identity.GetUserId());
-            }
-            private set
-            {
-                this.currentUser = value;
-            }
-        }
-
-        public ApplicationUserManager UserManager
-        {
-            get
-            {
-                return this.userManager ?? this.HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-            private set
-            {
-                this.userManager = value;
-            }
-        }
-
+    public partial class AdminController : BaseController
+    {        
         public virtual ActionResult Index(int page = 1)
         {
             var users = this.UserManager.Users
@@ -84,21 +58,19 @@ namespace FirmRegister.Web.Areas.Admin.Controllers
 
             return View("Index");
         }
-
-        [HttpPost]
+        
         public ActionResult MakeAdmin(string id)
         {
             this.UserManager.AddToRole(id, GlobalConstants.OperatorRole);
 
-            return View("Index");
+            return RedirectToAction("Index");
         }
-
-        [HttpPost]
+        
         public ActionResult Unadmin(string id)
         {
             this.UserManager.RemoveFromRole(id, GlobalConstants.OperatorRole);
 
-            return View("Index");
+            return RedirectToAction("Index");
         }
     }
 }
