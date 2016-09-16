@@ -10,5 +10,7 @@ namespace FirmRegister.Domain.Utils
     {
         public static string OperatorRole = "Operator";
         public static string EmployeeRole = "Employee";
+
+        public static int PageSize = 5;
     }
 }

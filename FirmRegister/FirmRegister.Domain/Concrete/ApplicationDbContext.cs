@@ -11,8 +11,6 @@ namespace FirmRegister.Domain.Concrete
         {
         }
 
-        public DbSet<Country> Countries { get; set; }
-
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

@@ -5,14 +5,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using FirmRegister.Domain.Utils.Enumerations;
-using System;
 
 namespace FirmRegister.Domain.Models
 {
     public class ApplicationUser : IdentityUser, IApplicationUser
     {
-        [Required]
-        [Range(0, 150, ErrorMessage = "Please provide valid age")]
         public int Age
         {
             get; set;
@@ -34,10 +31,6 @@ namespace FirmRegister.Domain.Models
         {
             get; set;
         }
-
-        public int CountryId { get; set; }
-
-        public Country Country { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

@@ -12,5 +12,8 @@ namespace FirmRegister.Web.Controllers
         {
             return View();
         }
+
+      //  [HttpPost]
+      //  public ActionResult Search()
     }
 }

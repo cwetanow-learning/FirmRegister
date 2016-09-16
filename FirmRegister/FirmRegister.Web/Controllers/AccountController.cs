@@ -10,6 +10,7 @@ using FirmRegister.Domain.Models;
 using FirmRegister.Domain.Utils;
 using Microsoft.AspNet.Identity.EntityFramework;
 using FirmRegister.Domain.Concrete;
+using FirmRegister.Domain.Contracts;
 
 namespace FirmRegister.Web.Controllers
 {

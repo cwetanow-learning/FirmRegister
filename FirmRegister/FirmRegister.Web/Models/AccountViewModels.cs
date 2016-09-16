@@ -1,4 +1,5 @@
-﻿using FirmRegister.Domain.Utils.Enumerations;
+﻿using FirmRegister.Domain.Models;
+using FirmRegister.Domain.Utils.Enumerations;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
