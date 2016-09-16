@@ -1,0 +1,26 @@
+﻿@model FirmRegister.Domain.Models.ApplicationUser
+
+<div class="well">
+    <div class="media">
+        <div class="media-body">
+            <h4 class="media-heading">
+                @Html.ActionLink(Model.Email, "Details", new { controller = "Employee", id = Model.Id })
+            </h4>
+            @if (Model.ImageData != null)
+            {
+
+                <img class="img-thumbnail" width="150" height="150"
+                     src="@Url.Action("GetImage", "Employee",new { Model.Id })" />
+
+            }
+            <p>
+                @Model.FirstName @Model.LastName
+            </p>
+            
+            <ul class="list-inline list-unstyled">
+                <li><span>Age: @Model.Age   </span></li>                             
+                
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+﻿@model IEnumerable<FirmRegister.Domain.Models.ApplicationUser>
+
+@{
+    ViewBag.Title = "Results";
+}
+
+<h2>Results</h2>
+
+@foreach (var item in Model)
+{
+    Html.Partial("_ShortenedEmployeeInfo", item);
+}
