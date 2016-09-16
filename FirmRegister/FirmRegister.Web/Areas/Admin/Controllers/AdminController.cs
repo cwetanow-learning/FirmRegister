@@ -56,15 +56,14 @@ namespace FirmRegister.Web.Areas.Admin.Controllers
             return RedirectToAction("Index");
 
         }
-
-        [HttpPost]
+        
         public virtual ActionResult Delete(string id)
         {
             var user = this.UserManager.FindById(id);
 
             this.UserManager.Delete(user);
 
-            return View("Index");
+            return RedirectToAction("Index");
         }
 
         public ActionResult MakeAdmin(string id)

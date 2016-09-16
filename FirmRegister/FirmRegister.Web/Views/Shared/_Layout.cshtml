@@ -21,11 +21,11 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Search", "Search", "Home")</li>
+                    <li>@Html.ActionLink("Search", "Search", "Home", new { area = "" }, null)</li>
                     @if (this.User.IsInRole(FirmRegister.Domain.Utils.GlobalConstants.OperatorRole))
             {
                         <li>
-                            @Html.ActionLink("Admin", "Index", "Admin", new { area = "Admin" }, null)
+                            @Html.ActionLink("Admin Panel", "Index", "Admin", new { area = "Admin" }, null)
                         </li>
                     }
                 </ul>

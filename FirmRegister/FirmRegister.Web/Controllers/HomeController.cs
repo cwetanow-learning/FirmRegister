@@ -17,6 +17,7 @@ namespace FirmRegister.Web.Controllers
             return View();
         }
 
+        [Authorize]
         public ViewResult Search()
         {
             return View();
@@ -43,7 +44,7 @@ namespace FirmRegister.Web.Controllers
             if (model.EndAge > 0)
             {
                 result = result
-                    .Where(x => x.Age >= model.EndAge);
+                    .Where(x => x.Age <= model.EndAge);
             }
 
             if (model.Gender != GenderType.NotSet)
